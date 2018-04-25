@@ -35,12 +35,12 @@ public class TestDocumentManagementController {
         File file = new File(path + "/src/test/resource/homepage.html");
         Document homepage = Jsoup.parse(file, "UTF-8", "http://www.cnn.com/");
 
-        List<String> actual = documentManagementController.parse(homepage, 5);
-
+        List<Article> actual = documentManagementController.parse(homepage, 5);
+        // TODO: Fix Me!
         assertEquals("Actual list of links equals expected list of links.", expected, actual);
 
         expected.remove(expected.size() -1);
-        List<String> fail = documentManagementController.parse(homepage, 4);
+        List<Article> fail = documentManagementController.parse(homepage, 4);
         assertEquals("Actual list of links equals modified expected list of links.", expected, fail);
     }
 

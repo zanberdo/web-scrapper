@@ -1,6 +1,5 @@
 package com.zanberdo.webscraper.scaper.controller;
 
-import com.zanberdo.webscraper.exception.NoContentException;
 import com.zanberdo.webscraper.model.Article;
 import com.zanberdo.webscraper.scaper.interfaces.DocumentManagementControllerInterface;
 import org.apache.logging.log4j.LogManager;
@@ -42,10 +41,16 @@ public class DocumentManagementController implements DocumentManagementControlle
                 limit = articleList.length();
             }
             for (int i=0; i < limit; i++) {
+                System.out.print(".");
+
                 final Article article = new Article();
-                article.setLink(articleList.getJSONObject(i).get("uri").toString());
-                article.setHeadline(articleList.getJSONObject(i).get("headline").toString());
-                article.setDescription(articleList.getJSONObject(i).get("description").toString());
+                if (Objects.nonNull(articleList.getJSONObject(i).get("uri")))
+                    article.setLink(articleList.getJSONObject(i).get("uri").toString());
+                if (Objects.nonNull(articleList.getJSONObject(i).get("headline")))
+                    article.setHeadline(articleList.getJSONObject(i).get("headline").toString());
+                if (Objects.nonNull(articleList.getJSONObject(i).get("description")))
+                    article.setDescription(articleList.getJSONObject(i).get("description").toString());
+
                 articles.add(article);
             }
         }
@@ -83,7 +88,7 @@ public class DocumentManagementController implements DocumentManagementControlle
 //    }
 
     @Override
-    public Article parse(Document document) {
+    public Article parse(final Document document) {
         log.info("  Parsing article document.");
 
         Article article = new Article();

@@ -10,6 +10,7 @@ import com.zanberdo.webscraper.scaper.interfaces.TargetSiteViewInterface;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -33,7 +34,7 @@ public class TestScraper {
 
     @Test
     public void testScrapper() throws Exception {
-        ArrayList<Article> expected = new ArrayList<>();
+        List<Article> expected = new ArrayList<>();
         Article expectedArticle = new Article();
         expectedArticle.setHeadline("Mock Headline");
         expectedArticle.setByline("Mock Byline");
@@ -42,7 +43,7 @@ public class TestScraper {
 
         Scraper scraper = new Scraper(mockTargetSiteView, mockDocumentManagementController, mockRandom);
 
-        ArrayList<Article> actual = scraper.scrape(null);
+        List<Article> actual = scraper.scrape(null);
         assertEquals("Actual list of articles matched expected list of articles", expected, actual);
 
         actual.add(new Article());

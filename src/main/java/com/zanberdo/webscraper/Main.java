@@ -7,7 +7,7 @@ import com.zanberdo.webscraper.scaper.view.TargetSiteView;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class Main {
@@ -48,7 +48,7 @@ public class Main {
         DocumentManagementController documentManagementController = new DocumentManagementController();
         Scraper scrapper = new Scraper(targetSiteView, documentManagementController, random);
 
-        ArrayList<Article> articles = scrapper.scrape(limit);
+        List<Article> articles = scrapper.scrape(limit);
         System.out.println(String.format("\nFound %s articles from cnn.com:\n", articles.size()));
         for (Article article : articles) {
             System.out.println(String.format("  Headline:  %s", article.getHeadline()));

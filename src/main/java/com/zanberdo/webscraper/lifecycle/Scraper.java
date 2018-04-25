@@ -22,9 +22,9 @@ public class Scraper {
     private static final String TARGET_SITE = "https://www.cnn.com";
     private static final int MAX_DELAY = 5;
 
-    private TargetSiteViewInterface targetSiteView;
-    private DocumentManagementControllerInterface documentManagementController;
-    private Random random;
+    private final TargetSiteViewInterface targetSiteView;
+    private final DocumentManagementControllerInterface documentManagementController;
+    private final Random random;
 
     public Scraper(TargetSiteViewInterface targetSiteView, DocumentManagementControllerInterface documentManagementController, Random random) {
         this.targetSiteView = targetSiteView;
@@ -32,35 +32,36 @@ public class Scraper {
         this.random = random;
     }
 
-    public ArrayList<Article> scrape(Integer limit) {
+    public List<Article> scrape(final Integer limit) {
         log.info("Begin scraping...");
 
-        ArrayList<Article> articles = new ArrayList<>();
+        //final ArrayList<Article> articles = new ArrayList<>();
 
-        Document homepage = targetSiteView.fetchDocument(TARGET_SITE);
+        final Document homepage = targetSiteView.fetchDocument(TARGET_SITE);
         // TODO: Return map of uri and headline - parse headline of tags.
-        List<String> links = documentManagementController.parse(homepage, limit);
+//        List<String> links = documentManagementController.parse(homepage, limit);
+        return documentManagementController.parse(homepage, limit);
         //        Collections.shuffle(links);
         // TODO: iterate over map of uri/headline
-        for (String link : links) {
-            System.out.print(".");
-
-            // TODO: Remove delay or reduce time...
-            int delay = random.nextInt(MAX_DELAY) + 1;
-            log.info("Delaying {} seconds...", delay);
-
-            try {
-                TimeUnit.SECONDS.sleep(delay);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-            Document document = targetSiteView.fetchDocument(TARGET_SITE + link);
-            // TODO: fetch article date
-            Article article = documentManagementController.parse(document);
-            article.setLink(TARGET_SITE + link);
-            articles.add(article);
-        }
-        return articles;
+//        for (Article articale : articles) {
+//            System.out.print(".");
+//
+//            // TODO: Remove delay or reduce time...
+//            final int delay = random.nextInt(MAX_DELAY) + 1;
+//            log.info("Delaying {} seconds...", delay);
+//
+//            try {
+//                TimeUnit.SECONDS.sleep(delay);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//
+//            final Document document = targetSiteView.fetchDocument(TARGET_SITE + articale.getLink());
+//            // TODO: fetch article date
+////            Article article = documentManagementController.parse(document);
+////            article.setLink(TARGET_SITE + artical.getLink);
+////            articles.add(article);
+//
+//        return articles;
     }
 }

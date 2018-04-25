@@ -12,14 +12,16 @@ import java.util.List;
  */
 public class MockDocumentManagementController extends DocumentManagementController {
     @Override
-    public List<String> parse(Document document, Integer limit) {
-        List<String> mockLinkList = new ArrayList<>();
-        mockLinkList.add("/Mock/Link/List");
+    public List<Article> parse(final Document document, Integer limit) {
+        List<Article> mockLinkList = new ArrayList<>();
+        final Article article = new Article();
+        article.setLink("/Mock/Link/List");
+        mockLinkList.add(article);
         return mockLinkList;
     }
 
     @Override
-    public Article parse(Document document) {
+    public Article parse(final Document document) {
         Article mockArticle = new Article();
         mockArticle.setHeadline("Mock Headline");
         mockArticle.setByline("Mock Byline");
