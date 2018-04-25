@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 public class Scraper {
     public static final Logger log = LogManager.getLogger(Scraper.class);
 
-    private static final String TARGET_SITE = "http://www.cnn.com";
+    private static final String TARGET_SITE = "https://www.cnn.com";
     private static final int MAX_DELAY = 5;
 
     private TargetSiteViewInterface targetSiteView;
@@ -38,13 +38,14 @@ public class Scraper {
         ArrayList<Article> articles = new ArrayList<>();
 
         Document homepage = targetSiteView.fetchDocument(TARGET_SITE);
-        // TODO: consider returning arraylist of articles with .link set, copy arraylist, shuffle new arraylist, then return original (unshuffled) arraylist
+        // TODO: Return map of uri and headline - parse headline of tags.
         List<String> links = documentManagementController.parse(homepage, limit);
-        Collections.shuffle(links);
-
+        //        Collections.shuffle(links);
+        // TODO: iterate over map of uri/headline
         for (String link : links) {
             System.out.print(".");
 
+            // TODO: Remove delay or reduce time...
             int delay = random.nextInt(MAX_DELAY) + 1;
             log.info("Delaying {} seconds...", delay);
 
@@ -55,6 +56,7 @@ public class Scraper {
             }
 
             Document document = targetSiteView.fetchDocument(TARGET_SITE + link);
+            // TODO: fetch article date
             Article article = documentManagementController.parse(document);
             article.setLink(TARGET_SITE + link);
             articles.add(article);

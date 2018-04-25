@@ -37,7 +37,7 @@ public class TestScraper {
         Article expectedArticle = new Article();
         expectedArticle.setHeadline("Mock Headline");
         expectedArticle.setByline("Mock Byline");
-        expectedArticle.setLink("http://www.cnn.com/Mock/Link/List");
+        expectedArticle.setLink("https://www.cnn.com/Mock/Link/List");
         expected.add(expectedArticle);
 
         Scraper scraper = new Scraper(mockTargetSiteView, mockDocumentManagementController, mockRandom);

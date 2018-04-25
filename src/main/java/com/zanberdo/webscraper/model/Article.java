@@ -1,9 +1,12 @@
 package com.zanberdo.webscraper.model;
 
+import java.util.Objects;
+
 public class Article {
     private String headline;
     private String byline;
     private String link;
+    private String description;
 
     public Article() {
     }
@@ -32,34 +35,38 @@ public class Article {
         this.link = link;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Article article = (Article) o;
-
-        if (headline != null ? !headline.equals(article.headline) : article.headline != null) return false;
-        if (byline != null ? !byline.equals(article.byline) : article.byline != null) return false;
-        return link != null ? link.equals(article.link) : article.link == null;
-
+        return Objects.equals(headline, article.headline) &&
+                Objects.equals(byline, article.byline) &&
+                Objects.equals(link, article.link) &&
+                Objects.equals(description, article.description);
     }
 
     @Override
     public int hashCode() {
-        int result = headline != null ? headline.hashCode() : 0;
-        result = 31 * result + (byline != null ? byline.hashCode() : 0);
-        result = 31 * result + (link != null ? link.hashCode() : 0);
-        return result;
+
+        return Objects.hash(headline, byline, link, description);
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Article{");
-        sb.append("headline='").append(headline).append('\'');
-        sb.append(", byline='").append(byline).append('\'');
-        sb.append(", link='").append(link).append('\'');
-        sb.append('}');
-        return sb.toString();
+        return "Article{" +
+                "headline='" + headline + '\'' +
+                ", byline='" + byline + '\'' +
+                ", link='" + link + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
 }

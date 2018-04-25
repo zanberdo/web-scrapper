@@ -43,7 +43,7 @@ public class Main {
                 System.exit(1);
             }
         }
-        System.out.print("Requesting top " + ((limit == null) ? "" : limit.toString()) + " articles from cnn.com");
+        System.out.print("Requesting top " + ((limit == null) ? "" : limit.toString() + " ") + "articles from cnn.com");
         TargetSiteView targetSiteView = new TargetSiteView();
         DocumentManagementController documentManagementController = new DocumentManagementController();
         Scraper scrapper = new Scraper(targetSiteView, documentManagementController, random);
