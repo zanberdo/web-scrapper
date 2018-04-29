@@ -8,11 +8,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.List;
-import java.util.Random;
 
 public class Main {
     private static final Logger log = LogManager.getLogger(Main.class);
-    private static final Random random = new Random();
 
     public static void main(String[] args) {
         log.info("Starting Web Scraper Application");
@@ -46,13 +44,14 @@ public class Main {
         System.out.print("Requesting top " + ((limit == null) ? "" : limit.toString() + " ") + "articles from cnn.com");
         TargetSiteView targetSiteView = new TargetSiteView();
         DocumentManagementController documentManagementController = new DocumentManagementController();
-        Scraper scrapper = new Scraper(targetSiteView, documentManagementController, random);
+        Scraper scrapper = new Scraper(targetSiteView, documentManagementController);
 
         List<Article> articles = scrapper.scrape(limit);
         System.out.println(String.format("\nFound %s articles from cnn.com:\n", articles.size()));
         for (Article article : articles) {
-            System.out.println(String.format("  Headline:  %s", article.getHeadline()));
-            if (article.getByline() != null) System.out.println(String.format("  Byline:    %s", article.getByline()));
+            System.out.println(String.format("  Headline:    %s", article.getHeadline()));
+            if (article.getByline() != null) System.out.println(String.format("  Byline:      %s", article.getByline()));
+            if (article.getDescription() != null) System.out.println(String.format("  Description: %s", article.getDescription()));
             System.out.println(String.format("  Reference: %s", article.getLink()));
             System.out.println();
         }

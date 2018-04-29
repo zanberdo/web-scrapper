@@ -23,27 +23,27 @@ import static org.junit.Assert.assertNotEquals;
 public class TestScraper {
     private static TargetSiteViewInterface mockTargetSiteView;
     private static DocumentManagementControllerInterface mockDocumentManagementController;
-    private static Random mockRandom;
 
     @Before
     public void setup() throws Exception {
         mockTargetSiteView = new MockTargetSiteView();
         mockDocumentManagementController = new MockDocumentManagementController();
-        mockRandom = new MockRandom();
     }
 
     @Test
     public void testScrapper() throws Exception {
-        List<Article> expected = new ArrayList<>();
-        Article expectedArticle = new Article();
+        final List<Article> expected = new ArrayList<>();
+        final Article expectedArticle = new Article();
+
         expectedArticle.setHeadline("Mock Headline");
-        expectedArticle.setByline("Mock Byline");
+        expectedArticle.setByline("null");
         expectedArticle.setLink("https://www.cnn.com/Mock/Link/List");
+        expectedArticle.setDescription("Mock description");
         expected.add(expectedArticle);
 
-        Scraper scraper = new Scraper(mockTargetSiteView, mockDocumentManagementController, mockRandom);
+        final Scraper scraper = new Scraper(mockTargetSiteView, mockDocumentManagementController);
 
-        List<Article> actual = scraper.scrape(null);
+        final List<Article> actual = scraper.scrape(null);
         assertEquals("Actual list of articles matched expected list of articles", expected, actual);
 
         actual.add(new Article());

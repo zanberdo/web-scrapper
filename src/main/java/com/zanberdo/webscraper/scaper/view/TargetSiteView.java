@@ -12,7 +12,6 @@ import java.io.IOException;
  * Created by mark.zanfardino on 11/7/16.
  */
 public class TargetSiteView implements TargetSiteViewInterface {
-
     private static final Logger log = LogManager.getLogger(TargetSiteView.class);
 
     @Override
