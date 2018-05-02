@@ -64,6 +64,7 @@ public class DocumentManagementController implements DocumentManagementControlle
                     article.setHeadline(articleList.getJSONObject(i).get("headline").toString());
                 if (Objects.nonNull(articleList.getJSONObject(i).get("description")))
                     article.setDescription(articleList.getJSONObject(i).get("description").toString());
+                // TODO: scrap byline from uri
 
                 articles.add(article);
             }
